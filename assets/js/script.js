@@ -4,6 +4,8 @@
 var generateBtn = document.querySelector("#generate");
 var passwordText = document.querySelector("#password");
 
+var PW = {};
+
 // Write password to the #password input
 function writePassword() {
   var password = "";
@@ -41,32 +43,53 @@ function writePassword() {
     "Would you like your password to include UPPERCASE letters? Enter YES or NO to continue."
   );
 
-  if (includeUpper==="YES"){
-    var ALPHA = ['A','B','C','D','E','F','G','H','I'];
-    for (let i = 0; i<passwordLength;i++){
-      password += ALPHA[Math.floor(Math.random()*9)]
+  if (includeUpper === "YES") {
+    var ALPHA = ["A", "B", "C", "D", "E", "F", "G", "H", "I"];
+    for (let i = 0; i < passwordLength; i++) {
+      password += ALPHA[Math.floor(Math.random() * 9)];
     }
   }
-   //Include LOWERCASE letters?
+  //Include LOWERCASE letters?
   var includeLower = window.prompt(
     "Would you like your password to include LOWERCASE letters? Enter YES or NO to continue."
   );
-   //Include SPECIAL CHARARCTERS?
+  //Include SPECIAL CHARARCTERS?
   var includeSpecial = window.prompt(
     "Would you like your password to include SPECIAL CHARACTERS? Enter YES or NO to continue."
   );
   // else {
-    //If response is valid, use it in creating an array of that length, which will become the pw
-   // var password = passwordLength;
-    //variable that targets text box
-    //var passwordText = document.querySelector("#password");
-    //displays the pw in the text box
-    //passwordText.value = password;
+  //If response is valid, use it in creating an array of that length, which will become the pw
+  // var password = passwordLength;
+  //variable that targets text box
+  //var passwordText = document.querySelector("#password");
+  //displays the pw in the text box
+  //passwordText.value = password;
   //}
 
   //var password = generatePassword();
 
   passwordText.value = password;
+}
+
+//Each pw aspect random function
+
+function randNum() {
+  Math.floor(Math.random() * 9);
+}
+
+function randUpp() {
+  ALPHA = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  return ALPHA[Math.floor(Math.random() * 26)];
+}
+
+function randLow() {
+  alpha = "abcdefghijklmnopqrstuvwxyz";
+  return alpha[Math.floor(Math.random() * 26)];
+}
+
+function randSpec() {
+  specialChar = "!#$%&'()*+,-./:; <=>?@[]^_`{|}~";
+  return specialChar[Math.floor(Math.random() * 33)];
 }
 
 // Add event listener to generate button
