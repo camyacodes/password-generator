@@ -2,11 +2,11 @@
 
 // Get references to the #generate element
 var generateBtn = document.querySelector("#generate");
-
-var alpha = ["A", "B", "C", "D", "E", "F", "G"];
+var passwordText = document.querySelector("#password");
 
 // Write password to the #password input
 function writePassword() {
+  var password = "";
   //Create variable that captures users response to pw length
   var passwordLength = Number(
     window.prompt(
@@ -25,14 +25,28 @@ function writePassword() {
     window.alert("Please enter a number between 8 and 128");
     return writePassword();
   }
+
   //Include NUMBERS?
   var includeNumbers = window.prompt(
     "Would you like your password to include NUMBERS? Enter YES or NO to continue."
   );
+
+  /*if (includeNumbers === "YES") {
+    for (let i = 0; i<passwordLength; i++) {
+      password += Math.floor(Math.random()*10);
+    }
+  }*/
   //Include UPPERCASE letters?
   var includeUpper = window.prompt(
     "Would you like your password to include UPPERCASE letters? Enter YES or NO to continue."
   );
+
+  if (includeUpper==="YES"){
+    var ALPHA = ['A','B','C','D','E','F','G','H','I'];
+    for (let i = 0; i<passwordLength;i++){
+      password += ALPHA[Math.floor(Math.random()*9)]
+    }
+  }
    //Include LOWERCASE letters?
   var includeLower = window.prompt(
     "Would you like your password to include LOWERCASE letters? Enter YES or NO to continue."
@@ -50,11 +64,9 @@ function writePassword() {
     //passwordText.value = password;
   //}
 
-  // var password = generatePassword();
+  //var password = generatePassword();
 
-  //var passwordText = document.querySelector("#password");
-
-  //passwordText.value = password;
+  passwordText.value = password;
 }
 
 // Add event listener to generate button
