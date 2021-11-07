@@ -1,13 +1,10 @@
-// Assignment code here
-
-// Get references to the #generate element
+//target html button and text box
 var generateBtn = document.querySelector("#generate");
 var passwordText = document.querySelector("#password");
 
-var PW = {};
-
 // Write password to the #password input
-function writePassword() {
+function generatePassword() {
+  //create password variable as an empty string
   var password = "";
   //Create variable that captures users response to pw length
   var passwordLength = Number(
@@ -29,52 +26,51 @@ function writePassword() {
   }
 
   //Include NUMBERS?
-  var includeNumbers = window.prompt(
-    "Would you like your password to include NUMBERS? Enter YES or NO to continue."
+  var includeNumbers = window.confirm(
+    "Would you like your password to include NUMBERS?"
   );
-
-  /*if (includeNumbers === "YES") {
-    for (let i = 0; i<passwordLength; i++) {
-      password += Math.floor(Math.random()*10);
-    }
-  }*/
   //Include UPPERCASE letters?
-  var includeUpper = window.prompt(
-    "Would you like your password to include UPPERCASE letters? Enter YES or NO to continue."
+  var includeUpper = window.confirm(
+    "Would you like your password to include UPPERCASE letters?"
   );
-
-  if (includeUpper === "YES") {
-    var ALPHA = ["A", "B", "C", "D", "E", "F", "G", "H", "I"];
-    for (let i = 0; i < passwordLength; i++) {
-      password += ALPHA[Math.floor(Math.random() * 9)];
-    }
-  }
   //Include LOWERCASE letters?
-  var includeLower = window.prompt(
-    "Would you like your password to include LOWERCASE letters? Enter YES or NO to continue."
+  var includeLower = window.confirm(
+    "Would you like your password to include LOWERCASE letters?"
   );
   //Include SPECIAL CHARARCTERS?
-  var includeSpecial = window.prompt(
-    "Would you like your password to include SPECIAL CHARACTERS? Enter YES or NO to continue."
+  var includeSpecial = window.confirm(
+    "Would you like your password to include SPECIAL CHARACTERS?"
   );
-  // else {
-  //If response is valid, use it in creating an array of that length, which will become the pw
-  // var password = passwordLength;
-  //variable that targets text box
-  //var passwordText = document.querySelector("#password");
-  //displays the pw in the text box
-  //passwordText.value = password;
-  //}
+  //loop through functions based on users input to create password of set length
+  for (let i = 0; i < passwordLength; i++) {
+    //check conditions
+    if (includeNumbers === true && password.length < passwordLength) {
+      password += randNum();
+    }
 
-  //var password = generatePassword();
+    if (includeUpper === true && password.length < passwordLength) {
+      password += randUpp();
+    }
 
+    if (includeLower === true && password.length < passwordLength) {
+      password += randLow();
+    }
+
+    if (includeSpecial === true && password.length < passwordLength) {
+      password += randSpec();
+    }
+  }
+  return password;
+}
+
+function writePassword() {
+  var password = generatePassword();
   passwordText.value = password;
 }
 
 //Each pw aspect random function
-
 function randNum() {
-  Math.floor(Math.random() * 9);
+  return Math.floor(Math.random() * 9);
 }
 
 function randUpp() {
@@ -89,7 +85,7 @@ function randLow() {
 
 function randSpec() {
   specialChar = "!#$%&'()*+,-./:; <=>?@[]^_`{|}~";
-  return specialChar[Math.floor(Math.random() * 33)];
+  return specialChar[Math.floor(Math.random() * 30)];
 }
 
 // Add event listener to generate button
