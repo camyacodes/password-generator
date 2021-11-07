@@ -22,7 +22,7 @@ function generatePassword() {
   ) {
     //reminds user of the parameters and then goes back to the original prompt
     window.alert("Please enter a number between 8 and 128");
-    return writePassword();
+    return generatePassword();
   }
 
   //Include NUMBERS?
@@ -41,6 +41,15 @@ function generatePassword() {
   var includeSpecial = window.confirm(
     "Would you like your password to include SPECIAL CHARACTERS?"
   );
+  if (
+    includeNumbers === false &&
+    includeLower === false &&
+    includeUpper === false &&
+    includeSpecial === false
+  ) {
+    window.alert("Please choose at least one character type");
+    return generatePassword();
+  }
   //loop through functions based on users input to create password of set length
   for (let i = 0; i < passwordLength; i++) {
     //check conditions
@@ -60,6 +69,7 @@ function generatePassword() {
       password += randSpec();
     }
   }
+
   return password;
 }
 
